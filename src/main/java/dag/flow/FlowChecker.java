@@ -25,10 +25,10 @@ public class FlowChecker {
     private boolean visited;
 
     public static boolean hasCycle(Collection<Worker<?, ?>> nodes) {
-        Map<Worker<?, ?>, FlowChecker> nodeCheckMap = nodes.stream().collect(Collectors.toMap(it -> it, FlowChecker::new));
-        for (FlowChecker vertex : nodeCheckMap.values()) {
+        Map<Worker<?, ?>, FlowChecker> flowCheckerMap = nodes.stream().collect(Collectors.toMap(it -> it, FlowChecker::new));
+        for (FlowChecker vertex : flowCheckerMap.values()) {
             List<String> way = new ArrayList<>();
-            if (!vertex.isVisited() && hasCycle(vertex, nodeCheckMap, way)) {
+            if (!vertex.isVisited() && hasCycle(vertex, flowCheckerMap, way)) {
                 return true;
             }
         }
